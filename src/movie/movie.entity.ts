@@ -1,23 +1,28 @@
-// import { Task } from 'src/tasks/task.entity';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
+import { User } from 'src/auth/users.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Movie {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  imdbId: string;
 
   @Column()
   title: string;
 
-  @Column()
-  imdRating: number;
+  @Column('decimal')
+  imdbRating: number;
 
-  @Column()
+  @Column('decimal')
   userRating: number;
 
   @Column()
   posterUrl: string;
 
-  // @OneToMany((type) => Task, (task) => task.user, { eager: true })
-  // tasks: Task[];
+  @ManyToOne((_type) => User, (user) => user.movies, { eager: false })
+  @Exclude({ toPlainOnly: true })
+  user: User;
 }

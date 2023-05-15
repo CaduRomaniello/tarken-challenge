@@ -12,19 +12,14 @@ export class OmdbApiService {
     )
       .then(async (response) => {
         const r = await response.text();
-        console.log(typeof r);
         return r;
       }) // Parse the response in JSON
-      .catch((err) => {
-        console.log(err);
+      .catch((_err) => {
         throw new ServiceUnavailableException();
       });
-
-    // console.log(response);
   }
 
   searchMoviesByImdbId(searchMovieDto: SearchMovieDto): Promise<string> {
-    console.log(searchMovieDto);
     return fetch(
       `http://www.omdbapi.com/?apikey=8fc25489&i=${searchMovieDto.imdbId}&r=json`,
       {
@@ -33,14 +28,10 @@ export class OmdbApiService {
     )
       .then(async (response) => {
         const r = await response.text();
-        console.log(r);
         return r;
       }) // Parse the response in JSON
-      .catch((err) => {
-        console.log(err);
+      .catch((_err) => {
         throw new ServiceUnavailableException();
       });
-
-    // console.log(response);
   }
 }
