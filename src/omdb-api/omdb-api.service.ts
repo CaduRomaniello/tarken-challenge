@@ -4,8 +4,9 @@ import { SearchMovieDto } from './dto/search-movies.dto';
 @Injectable()
 export class OmdbApiService {
   async searchMoviesByTitle(searchMovieDto: SearchMovieDto): Promise<string> {
+    // console.log(searchMovieDto);
     return fetch(
-      `http://www.omdbapi.com/?apikey=8fc25489&t=${searchMovieDto.title}&r=json`,
+      `http://www.omdbapi.com/?apikey=8fc25489&s=${searchMovieDto.title}&r=json&plot=full`,
       {
         method: 'GET',
       },

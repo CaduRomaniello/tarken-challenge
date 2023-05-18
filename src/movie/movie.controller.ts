@@ -22,7 +22,7 @@ import { DeleteMovieDto } from './dto/delete-movie.dto';
 export class MovieController {
   constructor(private moviesService: MovieService) {}
 
-  @Get('/all')
+  @Post('/all')
   async readAllMovies(@GetUser() user: User): Promise<Movie[]> {
     return this.moviesService.readAllMovies(user);
   }
@@ -43,7 +43,7 @@ export class MovieController {
     return this.moviesService.createMovie(createMovieDto, user);
   }
 
-  @Delete()
+  @Post('/delete')
   async deleteMovie(
     @Body() deleteMovieDto: DeleteMovieDto,
     @GetUser() user: User,

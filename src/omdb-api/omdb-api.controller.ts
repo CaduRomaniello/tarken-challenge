@@ -1,4 +1,4 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { OmdbApiService } from './omdb-api.service';
 import { SearchMovieDto } from './dto/search-movies.dto';
 
@@ -6,12 +6,14 @@ import { SearchMovieDto } from './dto/search-movies.dto';
 export class OmdbApiController {
   constructor(private omdbApiService: OmdbApiService) {}
 
-  @Get('/title')
+  @Post('/title')
   searchMoviesByTitle(@Body() searchMovieDto: SearchMovieDto): Promise<string> {
+    // console.log('search for title');
+    // console.log(`     ${searchMovieDto}`);
     return this.omdbApiService.searchMoviesByTitle(searchMovieDto);
   }
 
-  @Get('/imdb-id')
+  @Post('/imdb-id')
   searchMoviesByImdbId(
     @Body() searchMovieDto: SearchMovieDto,
   ): Promise<string> {
